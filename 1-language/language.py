@@ -86,3 +86,36 @@ def is_unique(input):
 
 input_series = [0, 1, 3, 4, 7, 7]
 print(is_unique(input_series))
+
+text = "1000 dogs are barking in the rain"
+def unique_chars_in_string(str_text):
+    unique_chars = {}
+    for ch in str_text:
+        if not unique_chars.get(ch) :
+            unique_chars[ch] = 1
+    return unique_chars
+
+print(unique_chars_in_string(text).keys())
+
+# P-1.29 Write a Python program that outputs all possible strings formed by using
+# the characters c , a , t , d , o , and g exactly once1
+
+text = "catdog"
+def scramble(input_text, scrambled = [], i = 0):
+
+    if i == 0:
+        scrambled = [None] * len(input_text)
+    if i == len(scrambled):
+        print(scrambled)
+        return
+    for ch in range(0, len(input_text)):
+        letter = input_text[ch]
+        new_input = list(input_text)
+        del new_input[ch]
+        scrambled[i] = letter
+        scramble(new_input, list(scrambled), i+1)
+
+
+scramble([x for x in text])
+
+
