@@ -8,17 +8,16 @@ import dateparser
 
 
 input_folder = "D:\\Users\\costin\\Downloads\\"
+intermediate_sufix = " - intermediate.csv"
 processed_sufix = "- processed.csv"
 ing_prefix = "Tranzactii_"
 revolut_prefix = "account-statement-"
 separator = "|"
 #"%d-%m-%Y"
-current_date = "10-02-2022" 
+current_date = "02-05-2022" 
 
 current_date = current_date if current_date else datetime.today().strftime("%d-%m-%Y")
 print(current_date);
-
-
 
 def convert_ro_date(datestring):
     dateobj = dateparser.parse(datestring, locales = ["ro-MD"])
@@ -43,11 +42,12 @@ def generate_revolut_statement_period():
 
 def process_ing_files(files):
     for filename in files:
+        intermediate_filename = filename + intermediate_sufix
         processed_filename = filename + processed_sufix
         print("input:" + filename);
-        print("output:" + processed_filename);
+        print("output:" + intermediate_filename);
         
-        output_file = open(processed_filename, "w")
+        output_file = open(intermediate_filename, "w")
         
         input_file = open(filename)
 
@@ -66,7 +66,7 @@ def process_ing_files(files):
         output_file.close()
         input_file.close()
 
-        result = pandas.read_csv(processed_filename, 
+        result = pandas.read_csv(intermediate_filename, 
                                     delimiter=",",
                                     header=0,
                                     skiprows=1,
